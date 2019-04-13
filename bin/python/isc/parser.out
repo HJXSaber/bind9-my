@@ -1,0 +1,1036 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> policylist
+Rule 1     policylist -> init policy
+Rule 2     policylist -> policylist policy
+Rule 3     init -> <empty>
+Rule 4     policy -> alg_policy
+Rule 5     policy -> zone_policy
+Rule 6     policy -> named_policy
+Rule 7     name -> STR
+Rule 8     name -> KEYTYPE
+Rule 9     name -> DATESUFFIX
+Rule 10    domain -> STR
+Rule 11    domain -> QSTRING
+Rule 12    domain -> KEYTYPE
+Rule 13    domain -> DATESUFFIX
+Rule 14    new_policy -> <empty>
+Rule 15    alg_policy -> ALGORITHM_POLICY ALGNAME new_policy alg_option_group SEMI
+Rule 16    zone_policy -> ZONE domain new_policy policy_option_group SEMI
+Rule 17    named_policy -> POLICY name new_policy policy_option_group SEMI
+Rule 18    duration -> NUMBER
+Rule 19    duration -> NONE
+Rule 20    duration -> NUMBER DATESUFFIX
+Rule 21    policy_option_group -> LBRACE policy_option_list RBRACE
+Rule 22    policy_option_list -> policy_option SEMI
+Rule 23    policy_option_list -> policy_option_list policy_option SEMI
+Rule 24    policy_option -> parent_option
+Rule 25    policy_option -> directory_option
+Rule 26    policy_option -> coverage_option
+Rule 27    policy_option -> rollperiod_option
+Rule 28    policy_option -> prepublish_option
+Rule 29    policy_option -> postpublish_option
+Rule 30    policy_option -> keysize_option
+Rule 31    policy_option -> algorithm_option
+Rule 32    policy_option -> keyttl_option
+Rule 33    policy_option -> standby_option
+Rule 34    alg_option_group -> LBRACE alg_option_list RBRACE
+Rule 35    alg_option_list -> alg_option SEMI
+Rule 36    alg_option_list -> alg_option_list alg_option SEMI
+Rule 37    alg_option -> coverage_option
+Rule 38    alg_option -> rollperiod_option
+Rule 39    alg_option -> prepublish_option
+Rule 40    alg_option -> postpublish_option
+Rule 41    alg_option -> keyttl_option
+Rule 42    alg_option -> keysize_option
+Rule 43    alg_option -> standby_option
+Rule 44    parent_option -> POLICY name
+Rule 45    directory_option -> DIRECTORY QSTRING
+Rule 46    coverage_option -> COVERAGE duration
+Rule 47    rollperiod_option -> ROLL_PERIOD KEYTYPE duration
+Rule 48    prepublish_option -> PRE_PUBLISH KEYTYPE duration
+Rule 49    postpublish_option -> POST_PUBLISH KEYTYPE duration
+Rule 50    keysize_option -> KEY_SIZE KEYTYPE NUMBER
+Rule 51    standby_option -> STANDBY KEYTYPE NUMBER
+Rule 52    keyttl_option -> KEYTTL duration
+Rule 53    algorithm_option -> ALGORITHM ALGNAME
+
+Terminals, with rules where they appear
+
+ALGNAME              : 15 53
+ALGORITHM            : 53
+ALGORITHM_POLICY     : 15
+COVERAGE             : 46
+DATESUFFIX           : 9 13 20
+DIRECTORY            : 45
+KEYTTL               : 52
+KEYTYPE              : 8 12 47 48 49 50 51
+KEY_SIZE             : 50
+LBRACE               : 21 34
+NONE                 : 19
+NUMBER               : 18 20 50 51
+POLICY               : 17 44
+POST_PUBLISH         : 49
+PRE_PUBLISH          : 48
+QSTRING              : 11 45
+RBRACE               : 21 34
+ROLL_PERIOD          : 47
+SEMI                 : 15 16 17 22 23 35 36
+STANDBY              : 51
+STR                  : 7 10
+ZONE                 : 16
+error                : 
+
+Nonterminals, with rules where they appear
+
+alg_option           : 35 36
+alg_option_group     : 15
+alg_option_list      : 34 36
+alg_policy           : 4
+algorithm_option     : 31
+coverage_option      : 26 37
+directory_option     : 25
+domain               : 16
+duration             : 46 47 48 49 52
+init                 : 1
+keysize_option       : 30 42
+keyttl_option        : 32 41
+name                 : 17 44
+named_policy         : 6
+new_policy           : 15 16 17
+parent_option        : 24
+policy               : 1 2
+policy_option        : 22 23
+policy_option_group  : 16 17
+policy_option_list   : 21 23
+policylist           : 2 0
+postpublish_option   : 29 40
+prepublish_option    : 28 39
+rollperiod_option    : 27 38
+standby_option       : 33 43
+zone_policy          : 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . policylist
+    (1) policylist -> . init policy
+    (2) policylist -> . policylist policy
+    (3) init -> .
+
+    ALGORITHM_POLICY reduce using rule 3 (init -> .)
+    ZONE            reduce using rule 3 (init -> .)
+    POLICY          reduce using rule 3 (init -> .)
+
+    policylist                     shift and go to state 1
+    init                           shift and go to state 2
+
+state 1
+
+    (0) S' -> policylist .
+    (2) policylist -> policylist . policy
+    (4) policy -> . alg_policy
+    (5) policy -> . zone_policy
+    (6) policy -> . named_policy
+    (15) alg_policy -> . ALGORITHM_POLICY ALGNAME new_policy alg_option_group SEMI
+    (16) zone_policy -> . ZONE domain new_policy policy_option_group SEMI
+    (17) named_policy -> . POLICY name new_policy policy_option_group SEMI
+
+    ALGORITHM_POLICY shift and go to state 6
+    ZONE            shift and go to state 4
+    POLICY          shift and go to state 3
+
+    alg_policy                     shift and go to state 5
+    zone_policy                    shift and go to state 7
+    policy                         shift and go to state 8
+    named_policy                   shift and go to state 9
+
+state 2
+
+    (1) policylist -> init . policy
+    (4) policy -> . alg_policy
+    (5) policy -> . zone_policy
+    (6) policy -> . named_policy
+    (15) alg_policy -> . ALGORITHM_POLICY ALGNAME new_policy alg_option_group SEMI
+    (16) zone_policy -> . ZONE domain new_policy policy_option_group SEMI
+    (17) named_policy -> . POLICY name new_policy policy_option_group SEMI
+
+    ALGORITHM_POLICY shift and go to state 6
+    ZONE            shift and go to state 4
+    POLICY          shift and go to state 3
+
+    alg_policy                     shift and go to state 5
+    zone_policy                    shift and go to state 7
+    policy                         shift and go to state 10
+    named_policy                   shift and go to state 9
+
+state 3
+
+    (17) named_policy -> POLICY . name new_policy policy_option_group SEMI
+    (7) name -> . STR
+    (8) name -> . KEYTYPE
+    (9) name -> . DATESUFFIX
+
+    STR             shift and go to state 14
+    KEYTYPE         shift and go to state 12
+    DATESUFFIX      shift and go to state 13
+
+    name                           shift and go to state 11
+
+state 4
+
+    (16) zone_policy -> ZONE . domain new_policy policy_option_group SEMI
+    (10) domain -> . STR
+    (11) domain -> . QSTRING
+    (12) domain -> . KEYTYPE
+    (13) domain -> . DATESUFFIX
+
+    STR             shift and go to state 19
+    QSTRING         shift and go to state 18
+    KEYTYPE         shift and go to state 16
+    DATESUFFIX      shift and go to state 17
+
+    domain                         shift and go to state 15
+
+state 5
+
+    (4) policy -> alg_policy .
+
+    ALGORITHM_POLICY reduce using rule 4 (policy -> alg_policy .)
+    ZONE            reduce using rule 4 (policy -> alg_policy .)
+    POLICY          reduce using rule 4 (policy -> alg_policy .)
+    $end            reduce using rule 4 (policy -> alg_policy .)
+
+
+state 6
+
+    (15) alg_policy -> ALGORITHM_POLICY . ALGNAME new_policy alg_option_group SEMI
+
+    ALGNAME         shift and go to state 20
+
+
+state 7
+
+    (5) policy -> zone_policy .
+
+    ALGORITHM_POLICY reduce using rule 5 (policy -> zone_policy .)
+    ZONE            reduce using rule 5 (policy -> zone_policy .)
+    POLICY          reduce using rule 5 (policy -> zone_policy .)
+    $end            reduce using rule 5 (policy -> zone_policy .)
+
+
+state 8
+
+    (2) policylist -> policylist policy .
+
+    ALGORITHM_POLICY reduce using rule 2 (policylist -> policylist policy .)
+    ZONE            reduce using rule 2 (policylist -> policylist policy .)
+    POLICY          reduce using rule 2 (policylist -> policylist policy .)
+    $end            reduce using rule 2 (policylist -> policylist policy .)
+
+
+state 9
+
+    (6) policy -> named_policy .
+
+    ALGORITHM_POLICY reduce using rule 6 (policy -> named_policy .)
+    ZONE            reduce using rule 6 (policy -> named_policy .)
+    POLICY          reduce using rule 6 (policy -> named_policy .)
+    $end            reduce using rule 6 (policy -> named_policy .)
+
+
+state 10
+
+    (1) policylist -> init policy .
+
+    ALGORITHM_POLICY reduce using rule 1 (policylist -> init policy .)
+    ZONE            reduce using rule 1 (policylist -> init policy .)
+    POLICY          reduce using rule 1 (policylist -> init policy .)
+    $end            reduce using rule 1 (policylist -> init policy .)
+
+
+state 11
+
+    (17) named_policy -> POLICY name . new_policy policy_option_group SEMI
+    (14) new_policy -> .
+
+    LBRACE          reduce using rule 14 (new_policy -> .)
+
+    new_policy                     shift and go to state 21
+
+state 12
+
+    (8) name -> KEYTYPE .
+
+    SEMI            reduce using rule 8 (name -> KEYTYPE .)
+    LBRACE          reduce using rule 8 (name -> KEYTYPE .)
+
+
+state 13
+
+    (9) name -> DATESUFFIX .
+
+    SEMI            reduce using rule 9 (name -> DATESUFFIX .)
+    LBRACE          reduce using rule 9 (name -> DATESUFFIX .)
+
+
+state 14
+
+    (7) name -> STR .
+
+    SEMI            reduce using rule 7 (name -> STR .)
+    LBRACE          reduce using rule 7 (name -> STR .)
+
+
+state 15
+
+    (16) zone_policy -> ZONE domain . new_policy policy_option_group SEMI
+    (14) new_policy -> .
+
+    LBRACE          reduce using rule 14 (new_policy -> .)
+
+    new_policy                     shift and go to state 22
+
+state 16
+
+    (12) domain -> KEYTYPE .
+
+    LBRACE          reduce using rule 12 (domain -> KEYTYPE .)
+
+
+state 17
+
+    (13) domain -> DATESUFFIX .
+
+    LBRACE          reduce using rule 13 (domain -> DATESUFFIX .)
+
+
+state 18
+
+    (11) domain -> QSTRING .
+
+    LBRACE          reduce using rule 11 (domain -> QSTRING .)
+
+
+state 19
+
+    (10) domain -> STR .
+
+    LBRACE          reduce using rule 10 (domain -> STR .)
+
+
+state 20
+
+    (15) alg_policy -> ALGORITHM_POLICY ALGNAME . new_policy alg_option_group SEMI
+    (14) new_policy -> .
+
+    LBRACE          reduce using rule 14 (new_policy -> .)
+
+    new_policy                     shift and go to state 23
+
+state 21
+
+    (17) named_policy -> POLICY name new_policy . policy_option_group SEMI
+    (21) policy_option_group -> . LBRACE policy_option_list RBRACE
+
+    LBRACE          shift and go to state 25
+
+    policy_option_group            shift and go to state 24
+
+state 22
+
+    (16) zone_policy -> ZONE domain new_policy . policy_option_group SEMI
+    (21) policy_option_group -> . LBRACE policy_option_list RBRACE
+
+    LBRACE          shift and go to state 25
+
+    policy_option_group            shift and go to state 26
+
+state 23
+
+    (15) alg_policy -> ALGORITHM_POLICY ALGNAME new_policy . alg_option_group SEMI
+    (34) alg_option_group -> . LBRACE alg_option_list RBRACE
+
+    LBRACE          shift and go to state 27
+
+    alg_option_group               shift and go to state 28
+
+state 24
+
+    (17) named_policy -> POLICY name new_policy policy_option_group . SEMI
+
+    SEMI            shift and go to state 29
+
+
+state 25
+
+    (21) policy_option_group -> LBRACE . policy_option_list RBRACE
+    (22) policy_option_list -> . policy_option SEMI
+    (23) policy_option_list -> . policy_option_list policy_option SEMI
+    (24) policy_option -> . parent_option
+    (25) policy_option -> . directory_option
+    (26) policy_option -> . coverage_option
+    (27) policy_option -> . rollperiod_option
+    (28) policy_option -> . prepublish_option
+    (29) policy_option -> . postpublish_option
+    (30) policy_option -> . keysize_option
+    (31) policy_option -> . algorithm_option
+    (32) policy_option -> . keyttl_option
+    (33) policy_option -> . standby_option
+    (44) parent_option -> . POLICY name
+    (45) directory_option -> . DIRECTORY QSTRING
+    (46) coverage_option -> . COVERAGE duration
+    (47) rollperiod_option -> . ROLL_PERIOD KEYTYPE duration
+    (48) prepublish_option -> . PRE_PUBLISH KEYTYPE duration
+    (49) postpublish_option -> . POST_PUBLISH KEYTYPE duration
+    (50) keysize_option -> . KEY_SIZE KEYTYPE NUMBER
+    (53) algorithm_option -> . ALGORITHM ALGNAME
+    (52) keyttl_option -> . KEYTTL duration
+    (51) standby_option -> . STANDBY KEYTYPE NUMBER
+
+    POLICY          shift and go to state 40
+    DIRECTORY       shift and go to state 46
+    COVERAGE        shift and go to state 45
+    ROLL_PERIOD     shift and go to state 32
+    PRE_PUBLISH     shift and go to state 35
+    POST_PUBLISH    shift and go to state 51
+    KEY_SIZE        shift and go to state 33
+    ALGORITHM       shift and go to state 41
+    KEYTTL          shift and go to state 44
+    STANDBY         shift and go to state 31
+
+    coverage_option                shift and go to state 47
+    policy_option                  shift and go to state 30
+    postpublish_option             shift and go to state 34
+    algorithm_option               shift and go to state 36
+    standby_option                 shift and go to state 39
+    keysize_option                 shift and go to state 37
+    directory_option               shift and go to state 38
+    keyttl_option                  shift and go to state 43
+    prepublish_option              shift and go to state 48
+    rollperiod_option              shift and go to state 49
+    parent_option                  shift and go to state 50
+    policy_option_list             shift and go to state 42
+
+state 26
+
+    (16) zone_policy -> ZONE domain new_policy policy_option_group . SEMI
+
+    SEMI            shift and go to state 52
+
+
+state 27
+
+    (34) alg_option_group -> LBRACE . alg_option_list RBRACE
+    (35) alg_option_list -> . alg_option SEMI
+    (36) alg_option_list -> . alg_option_list alg_option SEMI
+    (37) alg_option -> . coverage_option
+    (38) alg_option -> . rollperiod_option
+    (39) alg_option -> . prepublish_option
+    (40) alg_option -> . postpublish_option
+    (41) alg_option -> . keyttl_option
+    (42) alg_option -> . keysize_option
+    (43) alg_option -> . standby_option
+    (46) coverage_option -> . COVERAGE duration
+    (47) rollperiod_option -> . ROLL_PERIOD KEYTYPE duration
+    (48) prepublish_option -> . PRE_PUBLISH KEYTYPE duration
+    (49) postpublish_option -> . POST_PUBLISH KEYTYPE duration
+    (52) keyttl_option -> . KEYTTL duration
+    (50) keysize_option -> . KEY_SIZE KEYTYPE NUMBER
+    (51) standby_option -> . STANDBY KEYTYPE NUMBER
+
+    COVERAGE        shift and go to state 45
+    ROLL_PERIOD     shift and go to state 32
+    PRE_PUBLISH     shift and go to state 35
+    POST_PUBLISH    shift and go to state 51
+    KEYTTL          shift and go to state 44
+    KEY_SIZE        shift and go to state 33
+    STANDBY         shift and go to state 31
+
+    coverage_option                shift and go to state 58
+    keyttl_option                  shift and go to state 56
+    postpublish_option             shift and go to state 53
+    standby_option                 shift and go to state 55
+    keysize_option                 shift and go to state 54
+    alg_option                     shift and go to state 59
+    prepublish_option              shift and go to state 60
+    alg_option_list                shift and go to state 57
+    rollperiod_option              shift and go to state 61
+
+state 28
+
+    (15) alg_policy -> ALGORITHM_POLICY ALGNAME new_policy alg_option_group . SEMI
+
+    SEMI            shift and go to state 62
+
+
+state 29
+
+    (17) named_policy -> POLICY name new_policy policy_option_group SEMI .
+
+    ALGORITHM_POLICY reduce using rule 17 (named_policy -> POLICY name new_policy policy_option_group SEMI .)
+    ZONE            reduce using rule 17 (named_policy -> POLICY name new_policy policy_option_group SEMI .)
+    POLICY          reduce using rule 17 (named_policy -> POLICY name new_policy policy_option_group SEMI .)
+    $end            reduce using rule 17 (named_policy -> POLICY name new_policy policy_option_group SEMI .)
+
+
+state 30
+
+    (22) policy_option_list -> policy_option . SEMI
+
+    SEMI            shift and go to state 63
+
+
+state 31
+
+    (51) standby_option -> STANDBY . KEYTYPE NUMBER
+
+    KEYTYPE         shift and go to state 64
+
+
+state 32
+
+    (47) rollperiod_option -> ROLL_PERIOD . KEYTYPE duration
+
+    KEYTYPE         shift and go to state 65
+
+
+state 33
+
+    (50) keysize_option -> KEY_SIZE . KEYTYPE NUMBER
+
+    KEYTYPE         shift and go to state 66
+
+
+state 34
+
+    (29) policy_option -> postpublish_option .
+
+    SEMI            reduce using rule 29 (policy_option -> postpublish_option .)
+
+
+state 35
+
+    (48) prepublish_option -> PRE_PUBLISH . KEYTYPE duration
+
+    KEYTYPE         shift and go to state 67
+
+
+state 36
+
+    (31) policy_option -> algorithm_option .
+
+    SEMI            reduce using rule 31 (policy_option -> algorithm_option .)
+
+
+state 37
+
+    (30) policy_option -> keysize_option .
+
+    SEMI            reduce using rule 30 (policy_option -> keysize_option .)
+
+
+state 38
+
+    (25) policy_option -> directory_option .
+
+    SEMI            reduce using rule 25 (policy_option -> directory_option .)
+
+
+state 39
+
+    (33) policy_option -> standby_option .
+
+    SEMI            reduce using rule 33 (policy_option -> standby_option .)
+
+
+state 40
+
+    (44) parent_option -> POLICY . name
+    (7) name -> . STR
+    (8) name -> . KEYTYPE
+    (9) name -> . DATESUFFIX
+
+    STR             shift and go to state 14
+    KEYTYPE         shift and go to state 12
+    DATESUFFIX      shift and go to state 13
+
+    name                           shift and go to state 68
+
+state 41
+
+    (53) algorithm_option -> ALGORITHM . ALGNAME
+
+    ALGNAME         shift and go to state 69
+
+
+state 42
+
+    (21) policy_option_group -> LBRACE policy_option_list . RBRACE
+    (23) policy_option_list -> policy_option_list . policy_option SEMI
+    (24) policy_option -> . parent_option
+    (25) policy_option -> . directory_option
+    (26) policy_option -> . coverage_option
+    (27) policy_option -> . rollperiod_option
+    (28) policy_option -> . prepublish_option
+    (29) policy_option -> . postpublish_option
+    (30) policy_option -> . keysize_option
+    (31) policy_option -> . algorithm_option
+    (32) policy_option -> . keyttl_option
+    (33) policy_option -> . standby_option
+    (44) parent_option -> . POLICY name
+    (45) directory_option -> . DIRECTORY QSTRING
+    (46) coverage_option -> . COVERAGE duration
+    (47) rollperiod_option -> . ROLL_PERIOD KEYTYPE duration
+    (48) prepublish_option -> . PRE_PUBLISH KEYTYPE duration
+    (49) postpublish_option -> . POST_PUBLISH KEYTYPE duration
+    (50) keysize_option -> . KEY_SIZE KEYTYPE NUMBER
+    (53) algorithm_option -> . ALGORITHM ALGNAME
+    (52) keyttl_option -> . KEYTTL duration
+    (51) standby_option -> . STANDBY KEYTYPE NUMBER
+
+    RBRACE          shift and go to state 71
+    POLICY          shift and go to state 40
+    DIRECTORY       shift and go to state 46
+    COVERAGE        shift and go to state 45
+    ROLL_PERIOD     shift and go to state 32
+    PRE_PUBLISH     shift and go to state 35
+    POST_PUBLISH    shift and go to state 51
+    KEY_SIZE        shift and go to state 33
+    ALGORITHM       shift and go to state 41
+    KEYTTL          shift and go to state 44
+    STANDBY         shift and go to state 31
+
+    coverage_option                shift and go to state 47
+    policy_option                  shift and go to state 70
+    postpublish_option             shift and go to state 34
+    algorithm_option               shift and go to state 36
+    standby_option                 shift and go to state 39
+    keysize_option                 shift and go to state 37
+    directory_option               shift and go to state 38
+    keyttl_option                  shift and go to state 43
+    prepublish_option              shift and go to state 48
+    rollperiod_option              shift and go to state 49
+    parent_option                  shift and go to state 50
+
+state 43
+
+    (32) policy_option -> keyttl_option .
+
+    SEMI            reduce using rule 32 (policy_option -> keyttl_option .)
+
+
+state 44
+
+    (52) keyttl_option -> KEYTTL . duration
+    (18) duration -> . NUMBER
+    (19) duration -> . NONE
+    (20) duration -> . NUMBER DATESUFFIX
+
+    NUMBER          shift and go to state 74
+    NONE            shift and go to state 73
+
+    duration                       shift and go to state 72
+
+state 45
+
+    (46) coverage_option -> COVERAGE . duration
+    (18) duration -> . NUMBER
+    (19) duration -> . NONE
+    (20) duration -> . NUMBER DATESUFFIX
+
+    NUMBER          shift and go to state 74
+    NONE            shift and go to state 73
+
+    duration                       shift and go to state 75
+
+state 46
+
+    (45) directory_option -> DIRECTORY . QSTRING
+
+    QSTRING         shift and go to state 76
+
+
+state 47
+
+    (26) policy_option -> coverage_option .
+
+    SEMI            reduce using rule 26 (policy_option -> coverage_option .)
+
+
+state 48
+
+    (28) policy_option -> prepublish_option .
+
+    SEMI            reduce using rule 28 (policy_option -> prepublish_option .)
+
+
+state 49
+
+    (27) policy_option -> rollperiod_option .
+
+    SEMI            reduce using rule 27 (policy_option -> rollperiod_option .)
+
+
+state 50
+
+    (24) policy_option -> parent_option .
+
+    SEMI            reduce using rule 24 (policy_option -> parent_option .)
+
+
+state 51
+
+    (49) postpublish_option -> POST_PUBLISH . KEYTYPE duration
+
+    KEYTYPE         shift and go to state 77
+
+
+state 52
+
+    (16) zone_policy -> ZONE domain new_policy policy_option_group SEMI .
+
+    ALGORITHM_POLICY reduce using rule 16 (zone_policy -> ZONE domain new_policy policy_option_group SEMI .)
+    ZONE            reduce using rule 16 (zone_policy -> ZONE domain new_policy policy_option_group SEMI .)
+    POLICY          reduce using rule 16 (zone_policy -> ZONE domain new_policy policy_option_group SEMI .)
+    $end            reduce using rule 16 (zone_policy -> ZONE domain new_policy policy_option_group SEMI .)
+
+
+state 53
+
+    (40) alg_option -> postpublish_option .
+
+    SEMI            reduce using rule 40 (alg_option -> postpublish_option .)
+
+
+state 54
+
+    (42) alg_option -> keysize_option .
+
+    SEMI            reduce using rule 42 (alg_option -> keysize_option .)
+
+
+state 55
+
+    (43) alg_option -> standby_option .
+
+    SEMI            reduce using rule 43 (alg_option -> standby_option .)
+
+
+state 56
+
+    (41) alg_option -> keyttl_option .
+
+    SEMI            reduce using rule 41 (alg_option -> keyttl_option .)
+
+
+state 57
+
+    (34) alg_option_group -> LBRACE alg_option_list . RBRACE
+    (36) alg_option_list -> alg_option_list . alg_option SEMI
+    (37) alg_option -> . coverage_option
+    (38) alg_option -> . rollperiod_option
+    (39) alg_option -> . prepublish_option
+    (40) alg_option -> . postpublish_option
+    (41) alg_option -> . keyttl_option
+    (42) alg_option -> . keysize_option
+    (43) alg_option -> . standby_option
+    (46) coverage_option -> . COVERAGE duration
+    (47) rollperiod_option -> . ROLL_PERIOD KEYTYPE duration
+    (48) prepublish_option -> . PRE_PUBLISH KEYTYPE duration
+    (49) postpublish_option -> . POST_PUBLISH KEYTYPE duration
+    (52) keyttl_option -> . KEYTTL duration
+    (50) keysize_option -> . KEY_SIZE KEYTYPE NUMBER
+    (51) standby_option -> . STANDBY KEYTYPE NUMBER
+
+    RBRACE          shift and go to state 78
+    COVERAGE        shift and go to state 45
+    ROLL_PERIOD     shift and go to state 32
+    PRE_PUBLISH     shift and go to state 35
+    POST_PUBLISH    shift and go to state 51
+    KEYTTL          shift and go to state 44
+    KEY_SIZE        shift and go to state 33
+    STANDBY         shift and go to state 31
+
+    coverage_option                shift and go to state 58
+    keyttl_option                  shift and go to state 56
+    postpublish_option             shift and go to state 53
+    standby_option                 shift and go to state 55
+    keysize_option                 shift and go to state 54
+    alg_option                     shift and go to state 79
+    prepublish_option              shift and go to state 60
+    rollperiod_option              shift and go to state 61
+
+state 58
+
+    (37) alg_option -> coverage_option .
+
+    SEMI            reduce using rule 37 (alg_option -> coverage_option .)
+
+
+state 59
+
+    (35) alg_option_list -> alg_option . SEMI
+
+    SEMI            shift and go to state 80
+
+
+state 60
+
+    (39) alg_option -> prepublish_option .
+
+    SEMI            reduce using rule 39 (alg_option -> prepublish_option .)
+
+
+state 61
+
+    (38) alg_option -> rollperiod_option .
+
+    SEMI            reduce using rule 38 (alg_option -> rollperiod_option .)
+
+
+state 62
+
+    (15) alg_policy -> ALGORITHM_POLICY ALGNAME new_policy alg_option_group SEMI .
+
+    ALGORITHM_POLICY reduce using rule 15 (alg_policy -> ALGORITHM_POLICY ALGNAME new_policy alg_option_group SEMI .)
+    ZONE            reduce using rule 15 (alg_policy -> ALGORITHM_POLICY ALGNAME new_policy alg_option_group SEMI .)
+    POLICY          reduce using rule 15 (alg_policy -> ALGORITHM_POLICY ALGNAME new_policy alg_option_group SEMI .)
+    $end            reduce using rule 15 (alg_policy -> ALGORITHM_POLICY ALGNAME new_policy alg_option_group SEMI .)
+
+
+state 63
+
+    (22) policy_option_list -> policy_option SEMI .
+
+    RBRACE          reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+    POLICY          reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+    DIRECTORY       reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+    COVERAGE        reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+    ROLL_PERIOD     reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+    PRE_PUBLISH     reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+    POST_PUBLISH    reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+    KEY_SIZE        reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+    ALGORITHM       reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+    KEYTTL          reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+    STANDBY         reduce using rule 22 (policy_option_list -> policy_option SEMI .)
+
+
+state 64
+
+    (51) standby_option -> STANDBY KEYTYPE . NUMBER
+
+    NUMBER          shift and go to state 81
+
+
+state 65
+
+    (47) rollperiod_option -> ROLL_PERIOD KEYTYPE . duration
+    (18) duration -> . NUMBER
+    (19) duration -> . NONE
+    (20) duration -> . NUMBER DATESUFFIX
+
+    NUMBER          shift and go to state 74
+    NONE            shift and go to state 73
+
+    duration                       shift and go to state 82
+
+state 66
+
+    (50) keysize_option -> KEY_SIZE KEYTYPE . NUMBER
+
+    NUMBER          shift and go to state 83
+
+
+state 67
+
+    (48) prepublish_option -> PRE_PUBLISH KEYTYPE . duration
+    (18) duration -> . NUMBER
+    (19) duration -> . NONE
+    (20) duration -> . NUMBER DATESUFFIX
+
+    NUMBER          shift and go to state 74
+    NONE            shift and go to state 73
+
+    duration                       shift and go to state 84
+
+state 68
+
+    (44) parent_option -> POLICY name .
+
+    SEMI            reduce using rule 44 (parent_option -> POLICY name .)
+
+
+state 69
+
+    (53) algorithm_option -> ALGORITHM ALGNAME .
+
+    SEMI            reduce using rule 53 (algorithm_option -> ALGORITHM ALGNAME .)
+
+
+state 70
+
+    (23) policy_option_list -> policy_option_list policy_option . SEMI
+
+    SEMI            shift and go to state 85
+
+
+state 71
+
+    (21) policy_option_group -> LBRACE policy_option_list RBRACE .
+
+    SEMI            reduce using rule 21 (policy_option_group -> LBRACE policy_option_list RBRACE .)
+
+
+state 72
+
+    (52) keyttl_option -> KEYTTL duration .
+
+    SEMI            reduce using rule 52 (keyttl_option -> KEYTTL duration .)
+
+
+state 73
+
+    (19) duration -> NONE .
+
+    SEMI            reduce using rule 19 (duration -> NONE .)
+
+
+state 74
+
+    (18) duration -> NUMBER .
+    (20) duration -> NUMBER . DATESUFFIX
+
+    SEMI            reduce using rule 18 (duration -> NUMBER .)
+    DATESUFFIX      shift and go to state 86
+
+
+state 75
+
+    (46) coverage_option -> COVERAGE duration .
+
+    SEMI            reduce using rule 46 (coverage_option -> COVERAGE duration .)
+
+
+state 76
+
+    (45) directory_option -> DIRECTORY QSTRING .
+
+    SEMI            reduce using rule 45 (directory_option -> DIRECTORY QSTRING .)
+
+
+state 77
+
+    (49) postpublish_option -> POST_PUBLISH KEYTYPE . duration
+    (18) duration -> . NUMBER
+    (19) duration -> . NONE
+    (20) duration -> . NUMBER DATESUFFIX
+
+    NUMBER          shift and go to state 74
+    NONE            shift and go to state 73
+
+    duration                       shift and go to state 87
+
+state 78
+
+    (34) alg_option_group -> LBRACE alg_option_list RBRACE .
+
+    SEMI            reduce using rule 34 (alg_option_group -> LBRACE alg_option_list RBRACE .)
+
+
+state 79
+
+    (36) alg_option_list -> alg_option_list alg_option . SEMI
+
+    SEMI            shift and go to state 88
+
+
+state 80
+
+    (35) alg_option_list -> alg_option SEMI .
+
+    RBRACE          reduce using rule 35 (alg_option_list -> alg_option SEMI .)
+    COVERAGE        reduce using rule 35 (alg_option_list -> alg_option SEMI .)
+    ROLL_PERIOD     reduce using rule 35 (alg_option_list -> alg_option SEMI .)
+    PRE_PUBLISH     reduce using rule 35 (alg_option_list -> alg_option SEMI .)
+    POST_PUBLISH    reduce using rule 35 (alg_option_list -> alg_option SEMI .)
+    KEYTTL          reduce using rule 35 (alg_option_list -> alg_option SEMI .)
+    KEY_SIZE        reduce using rule 35 (alg_option_list -> alg_option SEMI .)
+    STANDBY         reduce using rule 35 (alg_option_list -> alg_option SEMI .)
+
+
+state 81
+
+    (51) standby_option -> STANDBY KEYTYPE NUMBER .
+
+    SEMI            reduce using rule 51 (standby_option -> STANDBY KEYTYPE NUMBER .)
+
+
+state 82
+
+    (47) rollperiod_option -> ROLL_PERIOD KEYTYPE duration .
+
+    SEMI            reduce using rule 47 (rollperiod_option -> ROLL_PERIOD KEYTYPE duration .)
+
+
+state 83
+
+    (50) keysize_option -> KEY_SIZE KEYTYPE NUMBER .
+
+    SEMI            reduce using rule 50 (keysize_option -> KEY_SIZE KEYTYPE NUMBER .)
+
+
+state 84
+
+    (48) prepublish_option -> PRE_PUBLISH KEYTYPE duration .
+
+    SEMI            reduce using rule 48 (prepublish_option -> PRE_PUBLISH KEYTYPE duration .)
+
+
+state 85
+
+    (23) policy_option_list -> policy_option_list policy_option SEMI .
+
+    RBRACE          reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+    POLICY          reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+    DIRECTORY       reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+    COVERAGE        reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+    ROLL_PERIOD     reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+    PRE_PUBLISH     reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+    POST_PUBLISH    reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+    KEY_SIZE        reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+    ALGORITHM       reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+    KEYTTL          reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+    STANDBY         reduce using rule 23 (policy_option_list -> policy_option_list policy_option SEMI .)
+
+
+state 86
+
+    (20) duration -> NUMBER DATESUFFIX .
+
+    SEMI            reduce using rule 20 (duration -> NUMBER DATESUFFIX .)
+
+
+state 87
+
+    (49) postpublish_option -> POST_PUBLISH KEYTYPE duration .
+
+    SEMI            reduce using rule 49 (postpublish_option -> POST_PUBLISH KEYTYPE duration .)
+
+
+state 88
+
+    (36) alg_option_list -> alg_option_list alg_option SEMI .
+
+    RBRACE          reduce using rule 36 (alg_option_list -> alg_option_list alg_option SEMI .)
+    COVERAGE        reduce using rule 36 (alg_option_list -> alg_option_list alg_option SEMI .)
+    ROLL_PERIOD     reduce using rule 36 (alg_option_list -> alg_option_list alg_option SEMI .)
+    PRE_PUBLISH     reduce using rule 36 (alg_option_list -> alg_option_list alg_option SEMI .)
+    POST_PUBLISH    reduce using rule 36 (alg_option_list -> alg_option_list alg_option SEMI .)
+    KEYTTL          reduce using rule 36 (alg_option_list -> alg_option_list alg_option SEMI .)
+    KEY_SIZE        reduce using rule 36 (alg_option_list -> alg_option_list alg_option SEMI .)
+    STANDBY         reduce using rule 36 (alg_option_list -> alg_option_list alg_option SEMI .)
+
